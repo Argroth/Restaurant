@@ -6,4 +6,12 @@ class Person:
         self.busy = False
 
 
+class Chef(Person):
+    role = "Chef"
+
+
+class Waiter(Person):
+    role = "Waiter"
+
+
 dbStaff = db.dbName["Staff"]

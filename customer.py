@@ -1,4 +1,5 @@
 import db
+dbCustomers = db.dbName["Customer"]
 
 
 class Customer:
@@ -7,4 +8,3 @@ class Customer:
         self.people = people
 
 
-dbCustomers = db.dbName["Customer"]

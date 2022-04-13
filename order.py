@@ -1,4 +1,5 @@
 import db
+dbOrders = db.dbName["Orders"]
 
 
 class Order:
@@ -7,4 +8,6 @@ class Order:
         self.completed = False
 
 
-dbOrders = db.dbName["Orders"]
+def createOrder():
+    dbOrders.insert_one({"order": "123"})
+
