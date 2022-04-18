@@ -14,32 +14,42 @@ import customer
 #
 # print(x.showDetails())
 answer = True
+update = ""
+status = ""
+
+
+class Status:
+    def __init__(self):
+        self.currentStatus = None
+
+    def createNewStatus(self, statusToCreate):
+        self.currentStatus = statusToCreate
+
+
 while answer:
     print(f"""
-        Customer options:
-        1. Enters
-        2.
-        3.
-        -----------
-        Staff options:
-        4. 
-        5. 
-        6.
-        7.
-        -----------
-        Admin options:
-        10. Generate tables
-        11. Generate Staff
+    |                       Basic's Restaurant                          |
+    |___________________________________________________________________|
+    |    Customer options: | Staff options:  | Admin options:           |
+    |    10. Enter         | 20.             | 30. Generate Tables      |
+    |    11.               | 21.             | 31. Generate Staff       |
+    |    12.               | 22.             | 32. Generate Customers   |
+    |    13.               | 23.             | X.                       |
+    |___________________________________________________________________|
+    |                                                                   |
+        Latest update: {update}                                         
+    |___________________________________________________________________|
+    |                                                                   |
+        Current Status: {status}                                         
+    |___________________________________________________________________|
     """)
     answer = input("Choose option: ")
     if answer == "1":
         pass
     elif answer == "2":
         pass
-    elif answer == "3":
-        pass
     # Get tables to clean and clean if needed
-    elif answer == "4":
+    elif answer == "x":
         tables = list(table.getTablesToClean())
         if (len(tables)) > 0:
             print(
@@ -49,9 +59,9 @@ while answer:
             selectedTable = input("Select table to clean(by Number): ")
             selectedTableObject = list(filter(lambda tableObject: tableObject['Number'] == int(selectedTable), tables))
 
-            table.cleanTables(selectedTableObject)
+            update = (table.cleanTables(selectedTableObject))
         else:
-            print("Nothing to clean! ")
+            update = "Nothing to clean! "
     # Generate tables (number of tables)
     elif answer == "10":
         print(
@@ -65,9 +75,7 @@ while answer:
     else:
         print("\n Not Valid Choice Try again")
 
-# TODO Create DB Connection
 # TODO Create Receipt
-# TODO Clean tables after customer
 # TODO Create Order queue
 # TODO Create Staff
 # TODO Create Tables

@@ -1,23 +1,27 @@
 import db
 import random
-import gc
 dbTables = db.dbName["Tables"]
 
 
 class Table:
-    def __init__(self, seats, **entries):
+    def __init__(self, Seats, **entries):
+        self._id = None
         self.Number = 0
-        self.Seats = seats
+        self.Seats = Seats
         self.Busy = False
         self.Ordered = False
         self.Clean = True
         self.__dict__.update(**entries)
 
     def showDetails(self):
-        print(self.Seats)
+        print(self.__dict__)
+
+    def showDBID(self):
+        return self._id
 
     def cleanTable(self):
         self.Clean = True
+        return self.Clean
 
 
 def generateTables(n):
@@ -37,21 +41,15 @@ def generateTables(n):
 def getTablesToClean():
     tablesToClean = dbTables.find({'Clean': False})
     return tablesToClean
-    # tablesToClean = dbTables.find_one({'clean': True})
-    # x = Table(**tablesToClean)
-    #
-    # print(x.showDetails())
-    # x = list(tablesToClean)
-    # print(x)
-    # Table(**x)
-    # print(Table(x).__dict__)
 
 
 def cleanTables(selectedTable):
-    print(isinstance(selectedTable, Table))
+    selectedTableDict = selectedTable[0]
+    tableObj = Table(**selectedTableDict)
 
-    print(selectedTable)
-    input()
-    # for obj in gc.get_objects():
-    #     if isinstance(obj, Table):
-    #         print(obj.__dict__)
+    tableObj.cleanTable()
+    dbTables.find_one_and_update({
+        "_id": tableObj.showDBID()}, {"$set": {"Clean": tableObj.cleanTable()}}
+    )
+
+    return f"Table {selectedTableDict['Number']} cleaned!"
