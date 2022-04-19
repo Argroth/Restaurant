@@ -5,7 +5,6 @@ dbTables = db.dbName["Tables"]
 
 class Table:
     def __init__(self, Seats, **entries):
-        self._id = None
         self.Number = 0
         self.Seats = Seats
         self.Busy = False
@@ -16,8 +15,8 @@ class Table:
     def showDetails(self):
         print(self.__dict__)
 
-    def showDBID(self):
-        return self._id
+    def showNumber(self):
+        return self.Number
 
     def cleanTable(self):
         self.Clean = True
@@ -29,7 +28,7 @@ def generateTables(n):
     index = 1
 
     if(len(list(dbTables.find()))) > 0:
-        return "Tables already exist"
+        return "Could not create tables. Tables already exist!"
     else:
         for i in instances:
             i.Number = index
@@ -49,7 +48,7 @@ def cleanTables(selectedTable):
 
     tableObj.cleanTable()
     dbTables.find_one_and_update({
-        "_id": tableObj.showDBID()}, {"$set": {"Clean": tableObj.cleanTable()}}
+        "Number": tableObj.showNumber()}, {"$set": {"Clean": tableObj.cleanTable()}}
     )
 
     return f"Table {selectedTableDict['Number']} cleaned!"
