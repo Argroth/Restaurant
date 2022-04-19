@@ -1,31 +1,27 @@
-import db
-import gc
-
 from tabulate import tabulate
+import datetime
 
 import log
 import table
+import customer
 import staff
 import order
-import customer
 
 
-# selectedTable = table.dbTables.find_one({})
-# x = table.Table(**selectedTable)
-#
-# print(x.showDetails())
+# logs
+# example:
+# who, category, action, result, date
+who = "system"
+category = ""
+action = ""
+result = ""
+date = datetime.datetime.now()
+
+
+# Menu
 answer = True
 update = ""
 status = ""
-
-
-class Status:
-    def __init__(self):
-        self.currentStatus = None
-
-    def createNewStatus(self, statusToCreate):
-        self.currentStatus = statusToCreate
-
 
 while answer:
     print(f"""
@@ -74,11 +70,11 @@ while answer:
 
                 # Generate last update and create log
                 update = (table.cleanTables(selectedTableObject))
-                log.createLog("System", update, "Tables", "Success")
+                # log.createLog("System", update, "Tables", "Success")
             else:
                 # Generate last update and create log
                 update = "Nothing to clean! "
-                log.createLog("System", update, "Tables", "Info")
+                # log.createLog("System", update, "Tables", "Info")
 
     # Generate tables (number of tables)
     elif answer == "10":
@@ -92,7 +88,10 @@ while answer:
         answer = None
 
     elif answer == "x":
-        pass
+        category = "user"
+        action = "create"
+        result = "Success"
+        log.createLog(who, category, action, result, date)
 
     else:
         print("\n Not Valid Choice Try again")

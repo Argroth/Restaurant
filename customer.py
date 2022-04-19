@@ -1,5 +1,6 @@
 import db
 dbCustomers = db.dbName["Customer"]
+category = "Customer"
 
 
 class Customer:
@@ -8,3 +9,5 @@ class Customer:
         self.people = people
 
 
+def newCustomer():
+    return {"user": "BaSic"}
