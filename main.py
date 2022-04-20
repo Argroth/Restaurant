@@ -26,9 +26,9 @@ while answer:
     |___________________________________________________________________|
     |    Customer options: | Staff options:  | Admin options:           |
     |    10. Enter         | 20. Guests      | 30. Generate Tables      |
-    |    11.               | 21. Tables      | 31. Generate Staff       |
-    |    12.               | 22.             | 32. Generate Customers   |
-    |    13.               | 23.             | X.                       |
+    |    11. Order         | 21. Tables      | 31. Generate Staff       |
+    |    12. Pay           | 22.             | 32. Generate Customers   |
+    |    13. Leave         | 23.             | X.                       |
     |___________________________________________________________________|
     |                                                                   |
         Latest update: {update}                                         
@@ -78,7 +78,7 @@ while answer:
                 log.createLog(who, category, action, result, message, date)
 
     # Generate tables (number of tables)
-    elif answer == "10":
+    elif answer == "30":
         category = "tables"
         action = "generate"
 
@@ -98,6 +98,14 @@ while answer:
         answer = None
 
     elif answer == "x":
+
+        client = customer.newCustomer(4)
+        client.sitAtTable()
+        client.pay()
+        client.order()
+        update = client.__dict__
+
+    elif answer == "logs":
         category = "user"
         action = "create"
         result = "Success"
