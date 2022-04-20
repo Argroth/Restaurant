@@ -23,6 +23,9 @@ class Table:
         return self.Clean
 
 
+instances = []
+
+
 def generateTables(n):
     instances = [Table(random.randrange(2, 8)) for i in range(n)]
     index = 1

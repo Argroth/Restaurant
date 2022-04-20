@@ -1,4 +1,6 @@
 import db
+import gc
+import table
 dbCustomers = db.dbName["Customer"]
 category = "Customer"
 
@@ -23,3 +25,10 @@ class Customer:
 def newCustomer(people):
     customer = Customer(people)
     return customer
+
+
+def selectTable():
+    for obj in gc.get_objects():
+        if isinstance(obj, table.Table):
+            print(obj)
+    return f"selected {4}"

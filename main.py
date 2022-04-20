@@ -99,11 +99,12 @@ while answer:
 
     elif answer == "x":
 
-        client = customer.newCustomer(4)
-        client.sitAtTable()
-        client.pay()
-        client.order()
-        update = client.__dict__
+        update = customer.selectTable()
+        # client = customer.newCustomer(4)
+        # client.sitAtTable()
+        # client.pay()
+        # client.order()
+        # update = client.__dict__
 
     elif answer == "logs":
         category = "user"
