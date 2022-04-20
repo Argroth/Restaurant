@@ -5,5 +5,12 @@ dbLogs = db.dbName["Logs"]
 # who, category, action, result, date
 
 
-def createLog(who, category, action, result, date):
-    print(who, category, action, result, date)
+def createLog(who, category, action, result, message, date):
+    dbLogs.insert_one({
+        "Who": who,
+        "Category": category,
+        "Action": action,
+        "Result": result,
+        "Message": message,
+        "Date": date
+    })

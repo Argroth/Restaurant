@@ -52,4 +52,3 @@ def cleanTables(selectedTable):
     )
 
     return {"type": "success", "message": f"Table {selectedTableDict['Number']} cleaned!"}
-    # return f"Table {selectedTableDict['Number']} cleaned!"

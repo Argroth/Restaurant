@@ -12,9 +12,6 @@ import order
 # example:
 # who, category, action, result, date
 who = "system"
-category = ""
-action = ""
-result = ""
 date = datetime.datetime.now()
 
 
@@ -47,6 +44,7 @@ while answer:
 
     # Select Staff category
     elif answer == "21":
+        category = "tables"
         tablesAnswer = input("""
             Choose option(staff):
                 211. Clean Table
@@ -54,6 +52,7 @@ while answer:
 
         # Get tables to clean and clean if needed
         if tablesAnswer == "211":
+            action = "clean"
             tables = list(table.getTablesToClean())
             if (len(tables)) > 0:
                 print(
@@ -69,20 +68,31 @@ while answer:
                 )
 
                 # Generate last update and create log
-                update = (table.cleanTables(selectedTableObject))
-                # log.createLog("System", update, "Tables", "Success")
+                feedback = (table.cleanTables(selectedTableObject))
+                message = update = feedback["message"]
+                log.createLog(who, category, action, feedback["type"], message, date)
             else:
                 # Generate last update and create log
-                update = "Nothing to clean! "
-                # log.createLog("System", update, "Tables", "Info")
+                message = update = "Nothing to clean! "
+                result = "info"
+                log.createLog(who, category, action, result, message, date)
 
     # Generate tables (number of tables)
     elif answer == "10":
-        print(
-            table.generateTables(int(input("Enter number of tables to generate: ")))
-        )
+        category = "tables"
+        action = "generate"
+
+        feedback = table.generateTables(int(input("Enter number of tables to generate: ")))
+        if feedback["type"] == "success":
+            update = feedback["message"]
+            log.createLog(who, category, action, feedback["type"], feedback["message"], date)
+        else:
+            update = feedback["message"]
+            log.createLog(who, category, action, feedback["type"], feedback["message"], date)
+
     elif answer == "9":
         pass
+
     elif answer == "Q" or answer == "q":
         print("\n Goodbye")
         answer = None
@@ -91,7 +101,8 @@ while answer:
         category = "user"
         action = "create"
         result = "Success"
-        log.createLog(who, category, action, result, date)
+        message = "test"
+        log.createLog(who, category, action, result, message, date)
 
     else:
         print("\n Not Valid Choice Try again")
