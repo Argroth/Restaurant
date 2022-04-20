@@ -28,13 +28,13 @@ def generateTables(n):
     index = 1
 
     if(len(list(dbTables.find()))) > 0:
-        return "Could not create tables. Tables already exist!"
+        return {"type": "error", "message": "Tables already exist!"}
     else:
         for i in instances:
             i.Number = index
             index += 1
             dbTables.insert_one(i.__dict__)
-        return f"{n} tables created!"
+        return {"type": "success", "message": f"{n} tables created"}
 
 
 def getTablesToClean():
@@ -51,4 +51,5 @@ def cleanTables(selectedTable):
         "Number": tableObj.showNumber()}, {"$set": {"Clean": tableObj.cleanTable()}}
     )
 
-    return f"Table {selectedTableDict['Number']} cleaned!"
+    return {"type": "success", "message": f"Table {selectedTableDict['Number']} cleaned!"}
+    # return f"Table {selectedTableDict['Number']} cleaned!"
