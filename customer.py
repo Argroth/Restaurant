@@ -22,8 +22,8 @@ class Customer:
         self.tableOccupied = 2
 
 
-def newCustomer(people):
-    customer = Customer(people)
+def newCustomer(n):
+    customer = Customer(n)
     return customer
 
 

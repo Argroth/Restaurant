@@ -100,6 +100,7 @@ while answer:
     elif answer == "x":
 
         update = customer.selectTable()
+
         # client = customer.newCustomer(4)
         # client.sitAtTable()
         # client.pay()
