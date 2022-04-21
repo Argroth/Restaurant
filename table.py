@@ -1,11 +1,11 @@
 import db
 import random
-dbTables = db.dbName["Tables"]
+dbTables = db.dbName["TablesArchive"]
 
 
 class Table:
-    def __init__(self, Seats, **entries):
-        self.Number = 0
+    def __init__(self, Seats, Number, **entries):
+        self.Number = Number
         self.Seats = Seats
         self.Busy = False
         self.Ordered = False
@@ -18,22 +18,23 @@ class Table:
     def showNumber(self):
         return self.Number
 
+    def notBusy(self):
+        return {"Number": self.Number, "Busy": self.Busy, "Seats": self.Seats}
+
     def cleanTable(self):
         self.Clean = True
         return self.Clean
 
 
-def generateTables(n):
-    instances = [Table(random.randrange(2, 8)) for i in range(n)]
-    index = 1
+tablesInstances = []
 
-    if(len(list(dbTables.find()))) > 0:
+
+def generateTables(n):
+    tablesInstances.append([Table(random.randrange(2, 8), i) for i in range(n)])
+
+    if(len(tablesInstances)) > 0:
         return {"type": "error", "message": "Tables already exist!"}
     else:
-        for i in instances:
-            i.Number = index
-            index += 1
-            dbTables.insert_one(i.__dict__)
         return {"type": "success", "message": f"{n} tables created"}
 
 

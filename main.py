@@ -26,9 +26,10 @@ while answer:
     |___________________________________________________________________|
     |    Customer options: | Staff options:  | Admin options:           |
     |    10. Enter         | 20. Guests      | 30. Generate Tables      |
-    |    11. Order         | 21. Tables      | 31. Generate Staff       |
-    |    12. Pay           | 22.             | 32. Generate Customers   |
-    |    13. Leave         | 23.             | X.                       |
+    |    11. Select Table  | 21. Tables      | 31. Generate Staff       |
+    |    12. Order         | 22.             | 32. Generate Customers   |
+    |    13. Pay           | 23.             | X.                       |
+    |    14. Leave         |                 |                          |
     |___________________________________________________________________|
     |                                                                   |
         Latest update: {update}                                         
@@ -82,7 +83,8 @@ while answer:
         category = "tables"
         action = "generate"
 
-        feedback = table.generateTables(int(input("Enter number of tables to generate: ")))
+        # feedback = table.generateTables(int(input("Enter number of tables to generate: ")))
+        feedback = table.generateTables(10)
         if feedback["type"] == "success":
             update = feedback["message"]
             log.createLog(who, category, action, feedback["type"], feedback["message"], date)
@@ -98,8 +100,9 @@ while answer:
         answer = None
 
     elif answer == "x":
-
-        update = customer.selectTable()
+        client = customer.newCustomer(4)
+        update = customer.selectTable(client)
+        order = customer.order()
 
         # client = customer.newCustomer(4)
         # client.sitAtTable()
